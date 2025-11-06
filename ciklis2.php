@@ -1,4 +1,5 @@
 <?php  
+
     $numb = 10;
     $summ = 0;
 for($i = 0; $i<=$numb; $i++){
