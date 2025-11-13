@@ -23,7 +23,7 @@ class User{
 
 }
 $user1 = new User ('Воучик');
-$res = $user1->setName ('Паровозик Томас');
+$res = $user1->setName ('Томас');
 echo $res ? 'Имя изменено' : 'Имя не изменено';
 ?>
 <p><?= $user1->getName() ?></p>
@@ -58,11 +58,55 @@ class Users {
     public function sayAboutMe() {
         echo "Имя фамилия: " . $this->firstName . " " . $this->lastName;
     }
+
+
+    private function isNameCorrect($lastName) {
+        return strlen($lastName) <= 128;
+    }
+        public function isEmailCorrect($email) {
+        if (strpos($email, '@') == false || strpos($email, '.') == false) {
+            return false;
+        }
+                $atPosition = strpos($email, '@');
+        $lastDotPosition = strrpos($email, '.');
+
+        return $lastDotPosition > $atPosition;
+        }
+
+         public function setFirstName($firstName) {
+        if ($this->isNameCorrect($firstName)) {
+            $this->firstName = $firstName;
+            return true;
+        }
+        return false;
+    }
+    public function setLastName($lastName) {
+        if ($this->isNameCorrect($lastName)) {
+            $this->lastName = $lastName;
+            return true;
+        }
+        return false;
+    }
+
+    public function setEmail($email) {
+        if ($this->isEmailCorrect($email)) {
+            $this->email = $email;
+            return true;
+        }
+        return false;
+    }
 }
 
 $user1 = new Users("Иван", "Петров; ", "ivan.petrov@gmail.com");
 $user1->sayAboutMe(); 
 echo "Email: " . $user1->getEmail();
+
+echo '<h2>Задание 2 и 3</h2>';
+echo "Проверка:";
+echo "<br>Слишком длинного имени: " . ($user1->setFirstName(str_repeat("", 129)) ? "Нет ошибки" : "Ошибка");
+echo "<br>Корректного email (без @): " . ($user1->setEmail("ivan.petrov@gmail.com") ? "Нет ошибки" : "Ошибка");
+echo "<br>Корректного email (точка до @): " . ($user1->setEmail("ivanpetrov@gmail.com") ? "Нет ошибки" : "Ошибка");
 ?>
 
+<?php 
 
