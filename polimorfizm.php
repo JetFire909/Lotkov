@@ -70,7 +70,7 @@ $persons = [
     new Teacher("Профессор Семенов", ["Математика", "Физика"]),
     new Teacher("Доктор Иванова", ["История", "Обществознание"]),
     new Manager("Ольга", "Заведующая кафедрой", ["организация работы кафедры", "контроль за учащимися"]),
-    new User("Михаил")
+    new User("Михаил"),
 ];
 
 function userSayAboutMe($user) {
@@ -111,3 +111,4 @@ if ($winner instanceof Teacher || $winner instanceof Manager) {
     userSayAboutMe($winner);
 }
 ?>
+
