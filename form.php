@@ -1,11 +1,3 @@
-<?php
-if(isset($_GET['number'])){
-    $number = $_GET['number'];
-    $s = $number**2;
-
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,16 +6,21 @@ if(isset($_GET['number'])){
     <title>Document</title>
 </head>
 <body>
-    <h1>Решение задач на условия</h1>
-    <h2>Площадь квадрата</h2>
-    <form action="">
-        <p>Введите сторону<input type="text" 
-        name="number"></p>
-        <p><input type="submit" value="отправить"></p>
+<h2>Задание 1</h2>
+    <form method="$_GET">
+        <p> Введите фамилию <input type='text' name="firstname"></p>
+        <p> Введите имя <input type='text' name="secondname"></p>
+        <p> Введите отчество <input type='text' name="lastname"></p>
+        <p><input type='submit' value='Отправить' name="FIO"></p>
     </form>
-    <p> <?php echo "Площадь квадрата : $s" ; ?></p>
-    
-    <h2>Площадь квадрата</h2>
+    </body>
+    </html>
+<?php 
+if(isset($_GET['FIO'])){
+$firstname = $_GET['firstname'];
+$secondname = $_GET['secondname'];
+$lastname = $_GET['lastname'];
+}
+echo "Ваше фио: $firstname $secondname $lastname"; 
+?>
 
-</body>
-</html>

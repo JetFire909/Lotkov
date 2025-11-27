@@ -37,7 +37,7 @@ class Student extends User{
 class Teacher extends User {
     private $subjects; 
 
-    public function __construct($name, $subjects = []) {
+    public function __construct($name, $subjects = [], ) {
         parent::__construct($name);
         $this->subjects = $subjects;
     }
@@ -69,7 +69,6 @@ class Manager extends User {
 }
 }
 
-
 $json = file_get_contents('users.json');
 $array = json_decode($json, true);
 
@@ -95,4 +94,23 @@ array_map(function($user) {
 }, $users);
 
 
+$json1 = file_get_contents('users1.json');
+$array1 = json_decode($json1, true);
+$user1 = $array1['users'];
+$objUser = [];
+foreach($user1 as $user2){
+    if($user2['type'] == 'Student'){
+        $objUser[] = new Student($user2['name'], $user2['group'] );
+    }
+    elseif($user2['type'] == 'Teacher'){
+        $objUser[] = new Teacher($user2['name'], $user2['subjects']);
+    }
+    elseif($user2['type'] == 'Manager'){
+        $objUser[] = new Manager($user2['name'], $user2['position']);
+    }
+}
+foreach($objUser as $user){
+    echo $user->sayAboutMe();
+}
 ?>
+
