@@ -112,5 +112,27 @@ foreach($user1 as $user2){
 foreach($objUser as $user){
     echo $user->sayAboutMe();
 }
+
+
+
+$json2 = file_get_contents('users1.json');
+$array2 = json_decode($json2, true);
+if(isset($_GET['delete'])){
+
+}
+
 ?>
 
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form method="$_GET">
+    <p> Введите пользователя <input type='text' name="number"></p>
+    <p><input type='submit' value='Удалить' name=""></p>
+    </form>
+    </body> -->

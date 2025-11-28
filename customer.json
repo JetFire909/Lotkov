@@ -4,43 +4,36 @@
             "Name": "Иван",
             "login": "vanya",
             "password": "gt3E1d@d",
-            "email":  "vanya@mail.ru",
+            "email":  "vanya@gmail.ru",
             "amount": "300"
         },
         {
             "Name": "Даня",
             "login": "danya",
             "password": "gt3E1d@d",
-            "email":  "vanya@mail.ru",
-            "amount": "300"
-        },
-        {
-            "Name": "Паша",
-            "login": "pashok",
-            "password": "gt3E1d@d",
-            "email":  "vanya@mail.ru",
-            "amount": "300"
+            "email":  "danya@gmail.ru",
+            "amount": "450"
         },
         {
             "Name": "Серега",
             "login": "sergei",
             "password": "gt3E1d@d",
-            "email":  "vanya@mail.ru",
-            "amount": "300"
+            "email":  "sergay@gmail.ru",
+            "amount": "200"
         },
         {
             "Name": "Алексей",
             "login": "alex",
             "password": "gt3E1d@d",
             "email":  "vanya@mail.ru",
-            "amount": "300"
+            "amount": "670"
         },
         {
             "Name": "Марат",
             "login": "marat",
             "password": "gt3E1d@d",
-            "email":  "vanya@mail.ru",
-            "amount": "300"
+            "email":  "maratik@gmail.ru",
+            "amount": "375"
         }
     ]
     
