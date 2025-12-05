@@ -4,4 +4,5 @@ class Milkeater extends Animal{
         parent::sayHello();
         echo ", я млекопетающее.";
     }
+    
 } 

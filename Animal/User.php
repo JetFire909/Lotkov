@@ -21,7 +21,7 @@ class User{
 
 public function sayHello(){
     echo "Меня зовут: $this->name <br>";
-    echo "Мои животные: <br>";
+    echo "Мои животные:";
     foreach($this->animals as $animal){
         echo $animal->sayHello(),'<br>';
     }

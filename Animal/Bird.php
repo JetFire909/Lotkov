@@ -1,4 +1,4 @@
-<?php
+ <?php
 class Bird extends Animal {
     public $wingspan;
     public function __construct( $height, $weight, $type, $wingspan){
@@ -8,4 +8,5 @@ class Bird extends Animal {
         parent::sayHello();
         echo  "у меня крылья $this->wingspan см ";
     }
-}
+} 
+?>
