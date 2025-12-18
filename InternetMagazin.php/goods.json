@@ -1,0 +1,40 @@
+{
+    "products": [
+        {
+            "name": "Фонтан Золотой рассвет",
+            "category": "Фонтаны",
+            "price": 1250,
+            "brand": "Пиротехникс",
+            "imageUrl": "fontan1.jpg",
+            "stock": 15,
+            "offer": null
+        },
+        {
+            "name": "Ракета Суперзвезда",
+            "category": "Ракеты",
+            "price": 850,
+            "brand": "StarPyro",
+            "imageUrl": "raketa1.jpg",
+            "stock": 25,
+            "offer": 0
+        },
+        {
+            "name": "Батарея салютов Кристалл",
+            "category": "Батареи салютов",
+            "price": 3500,
+            "brand": "FireMagic",
+            "imageUrl": "batareya1.jpg",
+            "stock": 6,
+            "offer": 0
+        },
+        {
+            "name": "Петарды Супер кобра",
+            "category": "Петарды",
+            "price": 335,
+            "brand": "Петарды.ру",
+            "imageUrl": "petardi2.jpg",
+            "stock": 24,
+            "offer": null
+        }
+    ]
+}
