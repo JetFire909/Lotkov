@@ -26,15 +26,6 @@
             "imageUrl": "batareya1.jpg",
             "stock": 6,
             "offer": 0
-        },
-        {
-            "name": "Петарды Супер кобра",
-            "category": "Петарды",
-            "price": 335,
-            "brand": "Петарды.ру",
-            "imageUrl": "petardi2.jpg",
-            "stock": 24,
-            "offer": null
         }
     ]
 }

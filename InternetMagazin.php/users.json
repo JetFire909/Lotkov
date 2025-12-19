@@ -1,0 +1,29 @@
+{
+    "users" : [
+        {
+            "name" : "Вася",
+            "login" : "vasya212",
+            "password" : "d76ewrE3w@Sd2",
+            "email" : "vasok@gmail.com",
+            "role" : "user"
+        },
+        {
+            "name" : "Данилуша",
+            "login" : "airman",
+            "password" : "qwerty12345",
+            "email" : "danonAmAm@yandex.ru",
+            "role" : "user"
+        },
+        {
+            "name" : "Alexey",
+            "login" : "XXX_666_ZZZ",
+            "password" : "65R65i75FV7746I5v7u4I7",
+            "email" : "Alexey@gmail.com",
+            "role" : "admin"
+        }
+    ]
+}
+
+
+
+
