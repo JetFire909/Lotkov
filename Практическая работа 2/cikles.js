@@ -30,11 +30,26 @@
 // }
 
 // zad 3
-let lastNumber = 5;
-let multiplicationResult = 1;
-for (let a = 1 ; a <= lastNumber ; a++){
-    if (a%2==0){
-    multiplicationResult *= a;
+// let lastNumber = 5;
+// let multiplicationResult = 1;
+// for (let a = 1 ; a <= lastNumber ; a++){
+//     if (a%2==0){
+//     multiplicationResult *= a;
+//     }
+// }
+// console.log(multiplicationResult)
+
+// zad 4
+let number = 15;
+for (let i = 2; i < number; i++) {
+    if (number % i == 0) {
+        console.log(i);
     }
 }
-console.log(multiplicationResult)
+
+// zad 5
+let k = parseInt(prompt("Введите число"));
+let results = [];
+for (let i = 100; i <= 999; i++) {
+    
+}
