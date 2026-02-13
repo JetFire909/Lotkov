@@ -54,3 +54,22 @@ const minVal = minInTheArray(myArr);
 console.log("Максимум:", maxVal);
 console.log("Минимум:", minVal);
 console.log(meanToDigit(myArr));
+
+// zad 4
+function transformArray(arr) {
+    let transformed = [];
+    for (let i = 0; i < arr.length; i++) {
+        let num = arr[i];
+        if (num > 0) {
+            transformed.push(num ** 2);
+        } else if (num < 0) {
+            transformed.push(Math.abs(num));
+        } else {
+            transformed.push(num);
+        }
+    }
+    return transformed;
+}
+
+const transformedArr = transformArray(myArr);
+console.log("Преобразованный массив:", transformedArr);
