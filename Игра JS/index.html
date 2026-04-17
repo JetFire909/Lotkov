@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>NASCAR: Super Speedway</title>
+    <style>
+        body { 
+            background: #1a1a1a; 
+            color: white; 
+            font-family: 'Arial Black', sans-serif; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            margin: 0;
+        }
+
+        #nascar-title {
+            font-size: 60px;
+            color: #f1c40f;
+            font-style: italic;
+            text-shadow: 4px 4px #c0392b;
+            margin: 10px 0;
+            letter-spacing: -5px;
+        }
+
+        #game-container { 
+            position: relative; 
+            width: 1000px; 
+            height: 700px; 
+            background: #1e5d1e;
+        }
+
+        canvas { position: absolute; top: 0; left: 0; }
+
+        .mashina { 
+            width: 34px; 
+            height: 18px; 
+            position: absolute; 
+            border-radius: 4px; 
+            z-index: 10; 
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+        }
+        
+        #igrok { background: #e74c3c; border: 2px solid white; box-shadow: 0 0 15px #e74c3c; }
+        #bot1 { background: #f39c12; }
+        #bot2 { background: #9b59b6; }
+        #bot3 { background: #3498db; }
+
+        #hud { 
+            display: flex; 
+            gap: 40px; 
+            background: rgba(0,0,0,0.85); 
+            padding: 15px 50px; 
+            border-radius: 0 0 30px 30px; 
+            border: 2px solid #444;
+            border-top: none;
+        }
+
+        .stat-box { text-align: center; }
+        .val { font-size: 28px; display: block; color: #f1c40f; }
+
+        #ui-bottom { margin-top: 20px; text-align: center; }
+        #shkala { 
+            width: 400px; 
+            height: 25px; 
+            background: #333; 
+            position: relative; 
+            border: 3px solid #000; 
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        #zelenaya-zona { 
+            width: 120px; 
+            height: 100%; 
+            background: #2ecc71; 
+            position: absolute; 
+            left: 140px; 
+            box-shadow: 0 0 20px #2ecc71;
+        }
+        #begunok { 
+            width: 8px; 
+            height: 100%; 
+            background: white; 
+            position: absolute; 
+            z-index: 5;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="nascar-title">NASCAR</div>
+
+    <div id="hud">
+        <div class="stat-box">КРУГ <span id="krugi" class="val">0/10</span></div>
+        <div class="stat-box">СКОРОСТЬ <span id="skorost" class="val">0</span></div>
+        <div class="stat-box">МЕСТО <span id="mesto" class="val">4</span></div>
+    </div>
+
+    <div id="game-container">
+        <canvas id="trassa" width="1000" height="700"></canvas>
+        <div id="igrok" class="mashina"></div>
+        <div id="bot1" class="mashina"></div>
+        <div id="bot2" class="mashina"></div>
+        <div id="bot3" class="mashina"></div>
+    </div>
+
+    <div id="ui-bottom">
+        <div id="shkala">
+            <div id="zelenaya-zona"></div>
+            <div id="begunok"></div>
+        </div>
+        <p>Жми <b>SPACE</b> для ускорения!</p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
