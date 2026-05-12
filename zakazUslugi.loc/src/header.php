@@ -28,8 +28,8 @@
                         class="navbar-toggler-icon"></span></button>
                 <div id="w2-collapse" class="collapse navbar-collapse">
                     <ul id="w3" class="navbar-nav nav">
-                        <li class="nav-item"><a class="nav-link" href="/login.php">войти</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/feedback.php">отзывы</a></li>
+                        <li class="nav-item"><a class="nav-link" href="login.php">войти</a></li>
+                        <li class="nav-item"><a class="nav-link" href="feedback.php">отзывы</a></li>
 
                         <!-- <li class="nav-item">
                             <form action="/site/logout" method="post">

@@ -1,4 +1,7 @@
-
+<?php 
+require 'src/init-login.php';
+include 'src/header.php'; 
+?>
 
     <main id="main" class="flex-shrink-0" role="main">
         <div class="container">
@@ -59,3 +62,4 @@
         </div>
     </main>
 
+<?php include 'src/footer.php' ?>

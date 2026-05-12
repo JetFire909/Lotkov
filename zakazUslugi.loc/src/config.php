@@ -2,7 +2,7 @@
 
 $dbOptions = [
     'hostname' => 'localhost',
-    'username' => 'hoot',
+    'username' => 'root',
     'password' => '',
-    'database' => 'zakaz_uslugi',
+    'database' => 'bdLotkov',
 ];
