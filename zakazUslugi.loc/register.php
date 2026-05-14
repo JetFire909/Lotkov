@@ -1,4 +1,7 @@
-<?php include 'src/header.php' ?>
+<?php 
+require 'src/init-register.php'; 
+include 'src/header.php'; 
+?>
 
     <main id="main" class="flex-shrink-0" role="main">
         <div class="container">
@@ -11,7 +14,7 @@
             <div class="site-register">
                 <h1>регистрация</h1>
 
-                <form id="contact-form" action="/register" method="post">
+                <form id="contact-form" action="" method="post">
                     <input type="hidden" name="_csrf"
                         value="rI0t9QFOm_bq9-tz8v8o0PlFBi-r8gGoNNEz1CtEt__v-H-4OXfyprKHgCzAsFuKphJQZ5mcbNxX4lWbHhCHtA==">
                     <div class="mb-3 field-registerform-login required">
@@ -56,4 +59,4 @@
         </div>
     </main>
 
-<?php include 'src/footer.php' ?>
+<?php include 'src/footer.php'?>
