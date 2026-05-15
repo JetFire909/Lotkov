@@ -5,38 +5,37 @@ use src\exceptions\InvalidArgumentException;
 use src\Entity;
 
 class User extends Entity {
+    protected string $tableName = 'user';
 
-    protected string $login;
-    protected string $email;
-    protected string $password;
-    protected string $role; 
-    protected string $name;
-    protected string $rating;
+    public ?string $login = '';
+    public ?string $email = '';
+    public ?string $password = '';
+    public ?string $role = ''; 
+    public ?string $name = '';
+    public ?string $phone = 'user';
 
 
-    protected bool $isGuest = true;
-    protected bool $isAdmin = false;
+    public bool $isGuest = true;
+    public bool $isAdmin = false;
 
-    public string $tableName = 'users';
-
-    public function getLogin(): string {
+    public function getLogin(): ?string 
+    {
         return $this->login ?? '';
     }
 
-    public function getEmail(): string {
-        return $this->email ?? '';
-    }
-
-    public function getName(): string {
+    public function getName(): ?string 
+    {
         return $this->name ?? '';
     }
 
-    public function isGuest(): bool {
-        return $this->isGuest;
+    public function getEmail(): ?string 
+    {
+        return $this->email ?? '';
     }
 
-    public function isAdmin(): bool {
-        return $this->isAdmin;
+    public function getPhone(): ?string 
+    {
+        return $this->email ?? '';
     }
 
     public function loadFromForm(array $fields): void {
@@ -79,16 +78,33 @@ class User extends Entity {
     }
 
     public function save(): bool {
+        $name = addslashes($this->name ?? '');
+        $login = addslashes($this->login ?? '');
+        $email = addslashes($this->email ?? '');
+        $phone = addslashes($this->phone ?? '');
+        $password = addslashes($this->password ?? '');
+        $role = !empty($this->role) ? addslashes($this->role) : 'user';
+
+        $safePassword = addslashes($this->password ?? '');
 
         $fields = [
-            'username' => $this->login,
-            'email' => $this->email,
-            'password' => $this->password,
-            'role' => $this->role,
-            'name' => $this->name
+            'name' => $name,
+            'login' => $login,
+            'email' => $email,
+            'password' => $password,
+            'phone' => $phone,
+            'role' => $role
         ];
 
-        return $this->insert($fields);
+        $result = $this->insert($fields);
+
+        if ($result){
+            $this->isGuest = false;
+            if ($this->role === 'admin'){
+                $this->isAdmin = true;
+            }
+        }
+        return $result;
     }
 }
 ?>

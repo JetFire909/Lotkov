@@ -7,12 +7,12 @@ use src\services\Request;
 
 abstract class Entity
 {
-    public string $tableName = '';
-    public int $id;
-    protected Request $request;
-    protected Db $db;
+    protected string $tableName = 'review';
+    public ?int $id = null;
+    protected ?Request $request = null;
+    protected ?Db $db = null ;
 
-    public function __construct(Request $request, Db $db){
+    public function __construct(?Request $request = null, Db $db = null){
         $this->request = $request;
         $this->db = $db;
     }
@@ -34,11 +34,12 @@ abstract class Entity
         }
         $propViaSemicolon = implode(', ', $props);
         $valueViaSemicolon = implode('", "', $values);
-        $sql = 'INSERT INTO ' . $this->tableName . '(' . $propViaSemicolon . ')' . 'VALUES ("' . $valueViaSemicolon . '")';
+        $sql = 'INSERT INTO ' . $this->tableName . '(' . $propViaSemicolon . ') VALUES ("' . $valueViaSemicolon . '")';
         return $this->db->querySql($sql);
     }
 
-    public function update($fields){}
+    public function update($fields){
+    }
 
     public function delete($fields){}
 
@@ -46,6 +47,31 @@ abstract class Entity
         $sql = 'SELECT * FROM ' . $this->tableName;
         $result = $this->db->querySql($sql);
         if($result === false) return null;
+        return $result;
+    }
+
+    public function getById(int $id): ?array {
+        $sql = 'SELECT * FROM ' . $this->tableName . ' WHERE id = ' . $id;
+        $result = $this->db->querySql($sql);
+
+        if(empty($result)){
+            return null;
+        }
+        return $result;
+    }      
+    
+    public function findByColumn(string $columnName, $value, int $limit = 0): ?array {
+        $sql = 'SELECT * FROM ' . $this->tableName . ' WHERE ' . $columnName . ' = "' . $value . '"';
+
+        if ($limit > 0) {
+            $sql = $sql . ' LIMIT ' . $limit;
+        }
+
+        $result = $this->db->querySql($sql);
+
+        if (empty($result)) {
+            return null;
+        }
         return $result;
     }
 }
