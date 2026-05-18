@@ -106,6 +106,26 @@ class User extends Entity {
         }
         return $result;
     }
+
+    public function validateLogin(): void {
+        if(empty($this->login)) {
+            throw new InvalidArgumentException('Логин не может быть пустым');
+        }
+        if(empty($this->password)) {
+            throw new InvalidArgumentException('Пароль не может быть пустым');
+        }
+        if(strlen($this->password) < 6) {
+            throw new InvalidArgumentException('Пароль слишком короткий');
+        }
+    }
+
+    public function login(): void{
+        $requestUser = $this->findByColumn('login', $this->login);
+        $this->load(fields: $requestUser);
+        if (!$requestUser) {
+            throw new InvalidArgumentException()
+        }
+    }
 }
 ?>
    

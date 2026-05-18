@@ -38,11 +38,6 @@ abstract class Entity
         return $this->db->querySql($sql);
     }
 
-    public function update($fields){
-    }
-
-    public function delete($fields){}
-
     public function findAll() : ?array{
         $sql = 'SELECT * FROM ' . $this->tableName;
         $result = $this->db->querySql($sql);
@@ -73,5 +68,20 @@ abstract class Entity
             return null;
         }
         return $result;
+    }
+
+    public function update(array $fields): bool {
+        $sets = [];
+        foreach($fields as $key => $value){
+            $sets[] = "$key='$value'";
+        }
+        $setSting = implode(', ', $sets);
+        $sql = 'UPDATE ' . $this->tableName . ' SET ' . $setSting . ' WHERE id =' . $this->id;
+        return $this->db->querySql($sql);
+    }
+
+    public function delete(): bool {
+        $sql = 'DELETE FROM ' . $this->tableName . ' WHERE id = ' . $this->id;
+        return  $this->db->querySql($sql);  
     }
 }
