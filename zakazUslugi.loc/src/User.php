@@ -13,7 +13,7 @@ class User extends Entity {
     public ?string $role = ''; 
     public ?string $name = '';
     public ?string $phone = 'user';
-
+    public ?string $token = '';
 
     public bool $isGuest = true;
     public bool $isAdmin = false;
@@ -42,8 +42,11 @@ class User extends Entity {
         $this->load($fields);
     }
 
-    public function validate(): void {
+    public function isAdmin(): bool {
+        return $this->role == 'admin' ? true : false;
+    }
 
+    public function validate(): void {
         if (empty($this->login)) {
             throw new InvalidArgumentException('Не передан логин');
         }
@@ -56,9 +59,6 @@ class User extends Entity {
         if (empty($this->password)) {
             throw new InvalidArgumentException('Не передан пароль');
         }
-        // if (empty($this->confirm_password)) {
-        //     throw new InvalidArgumentException('Повторите пароль');
-        // }
 
         if (!preg_match('/^[a-zA-Z0-9_]{3,20}$/', $this->login)) {
             throw new InvalidArgumentException('Логин должен содержать от 3 до 20 символов латиницы или цифр');
@@ -84,8 +84,6 @@ class User extends Entity {
         $phone = addslashes($this->phone ?? '');
         $password = addslashes($this->password ?? '');
         $role = !empty($this->role) ? addslashes($this->role) : 'user';
-
-        $safePassword = addslashes($this->password ?? '');
 
         $fields = [
             'name' => $name,
@@ -114,18 +112,101 @@ class User extends Entity {
         if(empty($this->password)) {
             throw new InvalidArgumentException('Пароль не может быть пустым');
         }
-        if(strlen($this->password) < 6) {
-            throw new InvalidArgumentException('Пароль слишком короткий');
+    }
+
+        public function login(): void {
+        $searchResult = $this->findByColumn('login', $this->login);
+        
+        if (empty($searchResult) || !is_array($searchResult)) {
+            throw new InvalidArgumentException('Пользователь с таким логином не найден');
+        }
+
+        if (isset($searchResult['id'])) {
+            $userData = $searchResult;
+        } elseif (isset($searchResult[0]) && is_array($searchResult[0])) {
+            $userData = $searchResult[0];
+        } else {
+            throw new InvalidArgumentException('Пользователь с таким логином не найден');
+        }
+
+        $passwordKey = null;
+        foreach (['password', 'pass', 'PASSWORD', 'user_password'] as $key) {
+            if (array_key_exists($key, $userData)) {
+                $passwordKey = $key;
+                break;
+            }
+        }
+
+        if ($passwordKey === null) {
+            throw new InvalidArgumentException('Ошибка системы. Доступные поля в таблице: ' . implode(', ', array_keys($userData)));
+        }
+
+        if ($userData[$passwordKey] !== $this->password) {
+            throw new InvalidArgumentException('Неверный логин или пароль');
+        }
+
+        $this->load($userData);
+
+        $generatedToken = sha1(random_bytes(100));
+
+        $userId = $this->id ?? $userData['id'] ?? null;
+        if ($userId && isset($this->db)) {
+            $safeToken = addslashes($generatedToken);
+            $sql = "UPDATE user SET token = '{$safeToken}' WHERE id = " . (int)$userId;
+            $this->db->query($sql);
+        }
+
+        $cookieValue = $userId . ':' . $generatedToken;
+        setcookie('token', $cookieValue, 0, '/', '', false, true);
+    }
+
+
+    public function logout(){
+        if(isset($_COOKIE['token'])){
+            setcookie('token', '', -1, '/', '', false, true);
         }
     }
 
-    public function login(): void{
-        $requestUser = $this->findByColumn('login', $this->login);
-        $this->load(fields: $requestUser);
-        if (!$requestUser) {
-            throw new InvalidArgumentException()
+    public function identity(): ?array {
+        $token = $_COOKIE['token'] ?? '';
+        if (empty($token) || !str_contains($token, ':')) {
+            return null;
         }
+
+        [$userId, $authToken] = explode(':', $token, 2);
+        $searchResult = $this->getById((int)$userId);
+        
+        if ($searchResult === null || empty($searchResult)) {
+            return null;
+        }
+
+        if (isset($searchResult[0]) && is_array($searchResult[0])) {
+            $userRow = $searchResult[0];
+        } else {
+            $userRow = $searchResult;
+        }
+
+        $tokenKey = null;
+        foreach (['token', 'TOKEN'] as $key) {
+            if (array_key_exists($key, $userRow)) {
+                $tokenKey = $key;
+                break;
+            }
+        }
+
+        if ($tokenKey === null || $userRow[$tokenKey] !== $authToken) {
+            return null;
+        }
+        return $userRow;
+    }
+
+
+    public function refreshAuthToken(): string {
+        return sha1(random_bytes(100));
+    }
+
+    public function createTokenCookies(): void {
+        
     }
 }
 ?>
-   

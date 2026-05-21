@@ -1,36 +1,25 @@
-<?php 
-
-use src\User;
-use src\exceptions\InvalidArgumentException;
-
+<?php
 require 'init.php';
-require_once 'User.php';
+$page = 'register.php';
+use src\User;
 
 $user = new User($request, $db);
 
-$error = null;
-$flash = null;
-
 if($request->isPost){
-    $formData = $request->post()['RegisterForm'] ?? [];
-    $user->loadFromForm($formData);
-
-    try {
+    $user->load($request->post());
+    try{
         $user->validate();
-
-        if ($user->save()) {
-            $_SESSION['flash'] = 'Вы успешно зарегистрировались!';
-            header('Location: ' . $_SERVER['REQUEST_URI']);
-            exit;
-        } else {
-            $error = "Не удалось ссохранить пользователя в базу данных";
+        if($user->save()){
+            $_SESSION['flash'] = 'Регистрация успешна';
+            header('Location: register.php');
+            exit();
         }
-    } catch (InvalidArgumentExceptionn $e) {
+    } catch(\src\exceptions\InvalidArgumentException $e){
         $error = $e->getMessage();
     }
 }
-
-if (isset($_SESSION['flash'])) {
+if(isset($_SESSION['flash'])){
     $flash = $_SESSION['flash'];
     unset($_SESSION['flash']);
 }
+?>

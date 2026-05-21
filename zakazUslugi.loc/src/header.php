@@ -1,3 +1,5 @@
+global $user;
+?>
 <!DOCTYPE html>
 <html lang="ru-RU" class="h-100">
 
@@ -23,13 +25,21 @@
                 <div id="nav-collapse" class="collapse navbar-collapse">
                     <ul class="navbar-nav nav">
                         <li class="nav-item"><a class="nav-link" href="feedback.php">отзывы</a></li>
-                        <li class="nav-item"><a class="nav-link" href="login.php">войти</a></li>
+                        
+                        
+                        <?php if(!isset($user) || $user->isGuest): ?>
+                            <li class="nav-item"><a class="nav-link" href="login.php">войти</a></li>
+                            <li class="nav-item"><a class="nav-link" href="register.php">регистрация</a></li>
+                        <?php else: ?>
+                            <li class="nav-item"><a class="nav-link" href="account.php">личный кабинет</a></li>
+                            <li class="nav-item"><a class="nav-link" href="logout.php"><?= htmlspecialchars($user->getLogin()) ?> (выйти)</a></li>
+                        <?php endif; ?>
+
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
-    <main id="main" class="flex-shrink-0" role="main">
     <div class="container">
     <?php if(isset($flash)) : ?>
         <div class="bg-success"><?= $flash ?></div>

@@ -56,7 +56,8 @@ class Feedback extends Entity{
         }
         if(strlen($this->feedback) > 255){
             throw new InvalidArgumentException('Превышен лимит символов всего 255');
-        }elseif(strlen($this->feedback) < 10){
+        }elseif(strlen($this->feedback) < 1
+        ){
             throw new InvalidArgumentException('Отзыв должен быть не более 10 символов');
         }
         if(empty($this->img['tmp_name'])){

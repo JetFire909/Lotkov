@@ -1,8 +1,10 @@
-<?php include 'src/header.php' ?>
-    
+<?php require 'src/init-account.php'; ?>
+<?php include 'src/header.php'; ?>
     <main id="main" class="flex-shrink-0" role="main">
         <div class="container">
-
+            <?php if(!empty($error)): ?>
+            <div class="alert alert-danger"><?= $error ?></div>
+            <?php endif; ?>
             <div class="feedback-index p-3">
                 <form id="w0" action="" method="post" enctype="multipart/form-data">
                     <input type="hidden" name="_csrf"

@@ -44,12 +44,10 @@
                                                     статус:
                                                 </div>
                                                 На посещение
-                                            </div>
-                                            
+                                            </div>                                            
                                             <a class="btn btn-danger" href="/account/application/view?id=9">отменить</a>
                                         </div>
                                     </div>
-                                  
                                 </div>
                             </div>
                         </div>

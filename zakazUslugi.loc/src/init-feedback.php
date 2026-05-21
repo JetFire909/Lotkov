@@ -4,6 +4,9 @@ use src\Feedback;
 use src\services\Request;
 use src\services\Db;
 require 'init.php';
+
+$page = 'feedback';
+
 $feedback = new Feedback($request, $db);
 
 if($request->isPost){
