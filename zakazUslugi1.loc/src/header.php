@@ -32,6 +32,7 @@
                         <li class="nav-item"> <a class="nav-link" href="account.php">личный кабинет</a></li>
                         <?php if(!$user->isGuest && $user->isAdmin()): ?>
                         <li class="nav-item"><a class="nav-link" href="admin-panel.php">админка</a></li>
+                        <li class="nav-item"><a class="nav-link" href="admin-reviews.php">модерация отзывов</a></li>
                         <?php endif; ?>
                     </ul>
                 </div>
@@ -42,3 +43,4 @@
     <?php if(isset($flash)) : ?>
         <div class="bg-success"><?= $flash ?></div>
     <?php endif ?>
+    </div>

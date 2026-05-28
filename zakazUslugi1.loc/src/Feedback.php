@@ -86,4 +86,3 @@ class Feedback extends Entity{
         return $this->insert($fields);
     }
 }
-?>

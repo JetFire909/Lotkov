@@ -15,17 +15,17 @@ if($request->isPost){
         $feedback->validate();
         if($feedback->save()){
             $_SESSION['flash'] = 'Отзыв добавлен';
+            header('Location: feedback.php');
+            exit();
         }
-    } catch(src\exceptions\InvalidArgumentException $e){
+    } catch(\InvalidArgumentException $e){
         $error = $e->getMessage();
     }
-    
 }
+
 if(isset($_SESSION['flash'])){
     $flash = $_SESSION['flash'];
     unset($_SESSION['flash']);
 }
 
 $feedbacks = $feedback->findAll();
-
-?>

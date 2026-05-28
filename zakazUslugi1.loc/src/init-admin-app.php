@@ -17,7 +17,7 @@ if(!isset($_SESSION)) {
 
 $id = (int)($_GET['id'] ?? 0);
 if($id === 0){
-    header('Location: admin-panel.php');
+    header('Location: 404.php');
     exit();
 }
 
@@ -39,12 +39,14 @@ if(isset($_GET['finish'])){
     exit();
 }
 
-$applicationData = $application->getById($id);
-if(empty($applicationData)){
-    header('Location: admin-panel.php');
+$res = $application->getById($id);
+
+if(empty($res) || !isset($res)){
+    header('Location: 404.php');
     exit();
 }
-$applicationData = $applicationData[0];
+
+$applicationData = $res;
 
 $flash = $_SESSION['admin_flash'] ?? '';
 unset($_SESSION['admin_flash']);
@@ -52,19 +54,6 @@ $error = '';
 
 if($request->isPost){
     $data = $request->post();
-    
-    if(isset($_POST['delete_app'])){
-        $application->id = $id;
-        if(method_exists($application, 'delete')){
-            $application->delete();
-        } else {
-            $application->update(['status' => 'provided']);
-        }
-        $_SESSION['admin_flash'] = 'Заявка успешно отменена';
-        header('Location: admin-panel.php');
-        exit();
-    }
-    
     try{
         if(empty($data['date'])){
             throw new \src\exceptions\InvalidArgumentException('Не указана дата');
