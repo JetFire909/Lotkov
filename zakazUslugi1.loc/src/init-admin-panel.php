@@ -2,11 +2,11 @@
 
 require 'init.php';
 
-if ($user->isGuest) {
+if($user->isGuest){
     header('Location: login.php');
     exit();
 }
-if (!$user->isAdmin()) {
+if(!$user->isAdmin()){
     header('Location: login.php');
     exit();
 }
@@ -29,14 +29,23 @@ if ($id > 0 && isset($_GET['finish'])) {
     exit();
 }
 
-$statusFilter = $_GET['status_id'] ?? '';
-
-if (!empty($statusFilter)) {
-    $applications = $application->findByColumn('status', $statusFilter);
-} else {
-    $applications = $application->findAll();
-}
-
+$applications = $application->findAll();
 if ($applications === null) {
     $applications = [];
+}
+
+if (isset($_GET['today'])) {
+    $today = date('Y-m-d');
+    $applications = array_filter($applications, function ($app) use ($today) {
+        return isset($app['date']) && $app['date'] === $today;
+    });
+    $applications = array_values($applications);
+}
+
+$statusFilter = $_GET['status_id'] ?? '';
+if (!empty($statusFilter)) {
+    $applications = array_filter($applications, function ($app) use ($statusFilter) {
+        return isset($app['status']) && $app['status'] === $statusFilter;
+    });
+    $applications = array_values($applications);
 }

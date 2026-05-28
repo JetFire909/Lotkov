@@ -13,9 +13,18 @@
         <div class="application-index">
             <h1>Все заявки из формы</h1>
 
+            <div class="mb-3">
+                <a href="admin-panel.php" class="btn <?= !isset($_GET['today']) ? 'btn-primary' : 'btn-outline-primary' ?> btn-sm">Все заявки</a>
+                <a href="admin-panel.php?today" class="btn <?= isset($_GET['today']) ? 'btn-primary' : 'btn-outline-primary' ?> btn-sm">Только сегодняшние</a>
+            </div>
+
             <div id="p0" data-pjax-container="" data-pjax-push-state data-pjax-timeout="1000">
                 <div class="application-search">
                     <form id="w0" action="admin-panel.php" method="get">
+                        <?php if(isset($_GET['today'])): ?>
+                            <input type="hidden" name="today" value="">
+                        <?php endif; ?>
+                        
                         <div class="form-group field-applicationsearch-status_id">
                             <label class="control-label" for="applicationsearch-status_id">статус</label>
                             <select id="applicationsearch-status_id" class="form-control" name="status_id">
@@ -76,9 +85,9 @@
                                                 <a class="btn btn-primary btn-sm" href="admin-app.php?id=<?= $app['id'] ?>">просмотр</a>
                                                 
                                                 <?php if($app['status'] === 'new'): ?>
-                                                    <a class="btn btn-primary btn-sm" href="admin-panel.php?id=<?= $app['id'] ?>&submit">подтвердить</a>
+                                                    <a class="btn btn-primary btn-sm" href="admin-panel.php?id=<?= $app['id'] ?>&submit<?= isset($_GET['today']) ? '&today' : '' ?>">подтвердить</a>
                                                 <?php elseif($app['status'] === 'timereserv' || $app['status'] === 'timechange'): ?>
-                                                    <a class="btn btn-success btn-sm" href="admin-panel.php?id=<?= $app['id'] ?>&finish">завершить</a>
+                                                    <a class="btn btn-success btn-sm" href="admin-panel.php?id=<?= $app['id'] ?>&finish<?= isset($_GET['today']) ? '&today' : '' ?>">завершить</a>
                                                 <?php endif; ?>
                                             </div>
                                         </div>
@@ -86,7 +95,7 @@
                                 </div>
                             <?php endforeach ?>
                         <?php else: ?>
-                            <div class="alert alert-info">Заявки с выбранным статусом отсутствуют или база данных пуста.</div>
+                            <div class="alert alert-info">Заявки отсутствуют или база данных пуста.</div>
                         <?php endif ?>
                     </div>
                 </div>

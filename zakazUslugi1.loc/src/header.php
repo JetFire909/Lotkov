@@ -15,7 +15,7 @@
     <header id="header">
         <nav class="navbar-expand-md navbar-dark bg-dark fixed-top navbar">
             <div class="container">
-                <a class="navbar-brand" href="index.php">Заказ услуги</a>
+                <a class="navbar-brand" href="index.php">Стоматология</a>
                 <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav-collapse"
                     aria-controls="nav-collapse" aria-expanded="false" aria-label="Переключить навигацию">
                     <span class="navbar-toggler-icon"></span>
