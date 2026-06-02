@@ -13,7 +13,7 @@ class Application extends Entity
     protected string $time;
     protected string $created_at;
     protected string $status;
-    public string $tableName = 'application';
+    public string $tableName = 'application'; 
 
     public function getAppId(): string{
         return $this->id;
@@ -28,10 +28,10 @@ class Application extends Entity
     public function validate(): void{
         date_default_timezone_set('Europe/Moscow');
         if(empty($this->reason)){
-            throw new InvalidArgumentException('Ну указана причина обращения');
+            throw new InvalidArgumentException('Не указана причина обращения');
         }
         if(empty($this->text)){
-            throw new InvalidArgumentException('Ну указано описание');
+            throw new InvalidArgumentException('Не указано описание');
         }
         if(empty($this->date)){
             throw new InvalidArgumentException('Не указана дата');
@@ -68,3 +68,4 @@ class Application extends Entity
         return $this->insert($fields);
     }
 }
+// исправить ER диаграмму

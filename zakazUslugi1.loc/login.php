@@ -15,6 +15,13 @@ include 'src/header.php';
             <div class="site-login">
                 <h1>Авторизация</h1>
 
+                <!-- КРАСНАЯ ТАБЛИЧКА ОБ ОШИБКЕ БЕЗ КРЕСТИКА -->
+                <?php if (isset($error) && !empty($error)): ?>
+                    <div class="alert alert-danger" role="alert" style="max-width: 41.66667%; margin-bottom: 20px;">
+                        <?= htmlspecialchars($error); ?>
+                    </div>
+                <?php endif; ?>
+
                 <div class="row">
                     <div class="col-lg-5">
                         <form id="login-form" action="" method="post">
@@ -51,10 +58,6 @@ include 'src/header.php';
                                 </div>
                             </div>
                         </form>
-                        <!-- <div style="color: #999">
-                            You may login with <strong>office-manager/manager123</strong> or
-                            <strong>asd/asd</strong>.
-                        </div> -->
                     </div>
                 </div>
             </div>

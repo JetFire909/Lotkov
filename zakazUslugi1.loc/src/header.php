@@ -12,6 +12,11 @@
 
 <body class="d-flex flex-column h-100">
 
+    <?php 
+    
+    $current_page = basename($_SERVER['SCRIPT_NAME']); 
+    ?>
+
     <header id="header">
         <nav class="navbar-expand-md navbar-dark bg-dark fixed-top navbar">
             <div class="container">
@@ -22,17 +27,22 @@
                 </button>
                 <div id="nav-collapse" class="collapse navbar-collapse">
                     <ul class="navbar-nav nav">
-                        <li class="nav-item"><a class="nav-link" href="feedback.php">отзывы</a></li>
-                        <?php if($user->isGuest):?>
-                        <li class="nav-item"><a class="nav-link <?= $page == 'login.php' ? 'active' : '' ?>" href="login.php" >войти</a></li>
+                        <li class="nav-item"><a class="nav-link <?= $current_page == 'feedback.php' ? 'active' : '' ?>" href="feedback.php">отзывы</a></li>
+                        
+                        <?php if($user->isGuest): ?>
+                            <li class="nav-item"><a class="nav-link <?= $current_page == 'login.php' ? 'active' : '' ?>" href="login.php">войти</a></li>
+                            <li class="nav-item"><a class="nav-link <?= $current_page == 'register.php' ? 'active' : '' ?>" href="register.php">регистрация</a></li>
                         <?php else: ?>
-                        <li class="nav-item"><a class="nav-link <?= $page == 'login.php' ? 'active' : '' ?>" href="logout.php" ><?= $user->getLogin() ?> выйти</a></li>
-                        <?php endif ?>
-                        <li class="nav-item"> <a class="nav-link" href="register.php">регистрация</a></li>
-                        <li class="nav-item"> <a class="nav-link" href="account.php">личный кабинет</a></li>
+                            <li class="nav-item"><a class="nav-link" href="logout.php"><?= htmlspecialchars($user->getLogin()) ?> выйти</a></li>
+                            
+                            <?php if(!$user->isAdmin()): ?>
+                                <li class="nav-item"><a class="nav-link <?= $current_page == 'account.php' ? 'active' : '' ?>" href="account.php">личный кабинет</a></li>
+                            <?php endif; ?>
+                        <?php endif; ?>
+
                         <?php if(!$user->isGuest && $user->isAdmin()): ?>
-                        <li class="nav-item"><a class="nav-link" href="admin-panel.php">админка</a></li>
-                        <li class="nav-item"><a class="nav-link" href="admin-reviews.php">модерация отзывов</a></li>
+                            <li class="nav-item"><a class="nav-link <?= $current_page == 'admin-panel.php' ? 'active' : '' ?>" href="admin-panel.php">админка</a></li>
+                            <li class="nav-item"><a class="nav-link <?= $current_page == 'admin-reviews.php' ? 'active' : '' ?>" href="admin-reviews.php">модерация отзывов</a></li>
                         <?php endif; ?>
                     </ul>
                 </div>

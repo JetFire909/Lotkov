@@ -4,7 +4,8 @@ namespace src;
 use InvalidArgumentException;
 use src\Entity;
 use src\exceptions\InvalidException;
-class Feedback extends Entity{
+
+class Feedback extends Entity {
     protected string $name;
     protected string $status;
     protected string $phone;
@@ -35,7 +36,7 @@ class Feedback extends Entity{
         $this->load($fields);
     }
 
-    public function validate(): void{
+    public function validate(): void {
         if(empty($this->name)){
             throw new InvalidArgumentException('Не передано имя');
         }
@@ -75,11 +76,12 @@ class Feedback extends Entity{
             throw new InvalidArgumentException('Нужно согласиться на обработку данных');
         }
     }     
+
     public function save(): bool {
-            $pathFile = 'uploads/' . $this->img['name'];
-            if(!move_uploaded_file($this->img['tmp_name'], $pathFile)){
-                throw new InvalidArgumentException('Ошибка при загрузке файла');
-            }
+        $pathFile = 'uploads/' . $this->img['name'];
+        if(!move_uploaded_file($this->img['tmp_name'], $pathFile)){
+            throw new InvalidArgumentException('Ошибка при загрузке файла');
+        }
         $fields = ['name' => $this->name, 'phone' => $this->phone, 'feedback' => $this->feedback,
         'img' => $pathFile
         ];

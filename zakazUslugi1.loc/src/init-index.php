@@ -1,7 +1,7 @@
 <?php
 
 require 'init.php';
-require_once 'Feedback.php';
+// require_once 'Feedback.php';
 
 $feedbackModel = new \src\Feedback($request, $db);
 
@@ -11,6 +11,6 @@ if ($reviews === null) {
 }
 
 $reviews = array_filter($reviews, function ($item) {
-    return isset($item['status']) && (int)$item['status'] === 2;
+    return isset($item['status']) && $item['status'] === 'approved';
 });
 $reviews = array_values($reviews);

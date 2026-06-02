@@ -21,10 +21,10 @@ if ($request->isPost) {
     if ($id > 0) {
         $feedbackModel->id = $id;
         if ($action === 'publish') {
-            $feedbackModel->update(['status' => 2]);
+            $feedbackModel->update(['status' => 'approved']);
         }
         if ($action === 'reject') {
-            $feedbackModel->update(['status' => 3]);
+            $feedbackModel->update(['status' => 'rejected']);
         }
         
         header('Location: admin-reviews.php');
@@ -39,8 +39,8 @@ if ($allReviews === null) {
 
 $activeReviews = [];
 foreach ($allReviews as $item) {
-    $statusValue = (int)($item['status'] ?? 1);
-    if ($statusValue !== 3) {
+    $statusValue = $item['status'] ?? 'pending';
+    if ($statusValue !== 'rejected') {
         $activeReviews[] = $item;
     }
 }
@@ -48,8 +48,8 @@ foreach ($allReviews as $item) {
 if (isset($_GET['only_new'])) {
     $reviews = [];
     foreach ($activeReviews as $item) {
-        $statusValue = (int)($item['status'] ?? 1);
-        if ($statusValue === 1) {
+        $statusValue = $item['status'] ?? 'pending';
+        if ($statusValue === 'pending') {
             $reviews[] = $item;
         }
     }

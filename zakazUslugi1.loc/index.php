@@ -7,7 +7,7 @@ include 'src/header.php';
     <div class="container mt-5">
 
         <h2 class="text-center mb-4">Отзывы наших клиентов</h2>
-        
+         
         <div class="d-flex flex-wrap justify-content-start gap-3">
             <?php if (!empty($reviews)): ?>
                 <?php foreach($reviews as $item): ?>

@@ -1,12 +1,7 @@
 <?php
-
 require 'init.php';
 
-if($user->isGuest){
-    header('Location: login.php');
-    exit();
-}
-if(!$user->isAdmin()){
+if($user->isGuest || !$user->isAdmin()){
     header('Location: login.php');
     exit();
 }
@@ -41,12 +36,16 @@ if(isset($_GET['finish'])){
 
 $res = $application->getById($id);
 
-if(empty($res) || !isset($res)){
+if(empty($res)){
     header('Location: 404.php');
     exit();
 }
 
-$applicationData = $res;
+if (isset($res[0]) && is_array($res[0])) {
+    $applicationData = $res[0];
+} else {
+    $applicationData = $res;
+}
 
 $flash = $_SESSION['admin_flash'] ?? '';
 unset($_SESSION['admin_flash']);
@@ -77,4 +76,3 @@ if($request->isPost){
         $error = $e->getMessage();
     }
 }
-?>

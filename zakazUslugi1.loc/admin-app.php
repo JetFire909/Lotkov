@@ -4,11 +4,12 @@
 <main id="main" class="flex-shrink-0" role="main">
     <div class="container">
         <?php if(!empty($error)): ?>
-        <div class="alert alert-danger"><?= $error ?></div>
+        <div class="alert alert-danger"><?= htmlspecialchars($error) ?></div>
         <?php endif; ?>
         <?php if(!empty($flash)): ?>
-        <div class="alert alert-success"><?= $flash ?></div>
+        <div class="alert alert-success"><?= htmlspecialchars($flash) ?></div>
         <?php endif; ?>
+        
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">Главная</a></li>
@@ -23,11 +24,11 @@
                 <form id="w0" action="" method="post">
                     <div class="mb-3">
                         <label class="form-label">Выберите дату</label>
-                        <input type="date" class="form-control" name="date" value="<?= $applicationData['date'] ?>">
+                        <input type="date" class="form-control" name="date" value="<?= htmlspecialchars($applicationData['date'] ?? '') ?>">
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Выберите время посещения</label>
-                        <input type="time" class="form-control" name="time" value="<?= $applicationData['time'] ?>">
+                        <input type="time" class="form-control" name="time" value="<?= htmlspecialchars($applicationData['time'] ?? '') ?>">
                     </div>
                     <button type="submit" class="btn btn-primary">изменить время</button>
                 </form>
@@ -35,30 +36,44 @@
 
             <div class="card" style="width: 18rem;">
                 <div class="card-body">
-                    <h3 class="card-title"><?= $applicationData['reason'] ?></h3>
-                    <p class="card-text">Пользователь: <?= $applicationData['user_id'] ?></p>
-                    <p class="card-text"><?= $applicationData['text'] ?></p>
+                    <h3 class="card-title"><?= htmlspecialchars($applicationData['reason'] ?? 'Без названия') ?></h3>
+                    <p class="card-text">Пользователь: <?= htmlspecialchars($applicationData['user_id'] ?? 'Не указан') ?></p>
+                    <p class="card-text"><?= htmlspecialchars($applicationData['text'] ?? '') ?></p>
                     <div class="card-text">
                         <div class="opacity-50">дата и время посещения:</div>
-                        <?= $applicationData['date'] ?> <?= $applicationData['time'] ?>
+                        <?= htmlspecialchars($applicationData['date'] ?? '') ?> <?= htmlspecialchars($applicationData['time'] ?? '') ?>
                     </div>
                     <div class="card-text">
                         <div class="opacity-50">дата и время создания:</div>
-                        <?= $applicationData['created_at'] ?>
+                        <?= htmlspecialchars($applicationData['created_at'] ?? 'Не указано') ?>
                     </div>
                     <div class="card-text mb-3">
                         <div class="opacity-50">статус:</div>
-                        <?= $applicationData['status'] ?>
+                        <?php 
+                        $status = $applicationData['status'] ?? 'new';
+                        if ($status === 'new') {
+                            echo 'Новая';
+                        } elseif ($status === 'timereserv') {
+                            echo 'Время забронировано';
+                        } elseif ($status === 'timechange') {
+                            echo 'Время изменено';
+                        } elseif ($status === 'provided') {
+                            echo 'Завершена';
+                        } else {
+                            echo htmlspecialchars($status);
+                        }
+                        ?>
                     </div>
                     
-                    <form action="" method="post" class="d-inline">
-                        <!-- <button type="submit" name="delete_app" class="btn btn-danger">отменить</button> -->
-                    </form>
+                    <?php 
+                    $currentStatus = $applicationData['status'] ?? 'new';
+                    $appId = $applicationData['id'] ?? $id;
+                    ?>
                     
-                    <?php if($applicationData['status'] === 'new'): ?>
-                     <a class="btn btn-primary" href="admin-app.php?id=<?= $applicationData['id'] ?>&submit">подтвердить</a>
-                    <?php elseif($applicationData['status'] === 'timereserv' || $applicationData['status'] === 'timechange'): ?>
-                    <a class="btn btn-success" href="admin-app.php?id=<?= $applicationData['id'] ?>&finish">завершить</a>
+                    <?php if($currentStatus === 'new'): ?>
+                     <a class="btn btn-primary" href="admin-app.php?id=<?= $appId ?>&submit">подтвердить</a>
+                    <?php elseif($currentStatus === 'timereserv' || $currentStatus === 'timechange'): ?>
+                    <a class="btn btn-success" href="admin-app.php?id=<?= $appId ?>&finish">завершить</a>
                     <?php endif; ?>
                 </div>
             </div>

@@ -22,7 +22,7 @@
                 <div class="d-flex flex-wrap justify-content-start gap-3">
                     <?php if (!empty($reviews)): ?>
                         <?php foreach($reviews as $item): ?>
-                            <?php $reviewStatus = (int)($item['status'] ?? 1); ?>
+                            <?php $reviewStatus = $item['status'] ?? 'pending'; ?>
                             <div class="card" style="width: 18rem;">
                                 <?php if(!empty($item['img'])): ?>
                                     <img src="<?= htmlspecialchars($item['img']) ?>" class="border-0" alt="Фото" style="width: 100%;">
@@ -31,14 +31,25 @@
                                     <h5 class="card-title"><?= htmlspecialchars($item['name'] ?? '') ?></h5>
                                     <p class="card-text"><?= htmlspecialchars($item['feedback'] ?? '') ?></p>
                                     
+                                    <div class="card-text mb-2">
+                                        <div class="opacity-50">Статус:</div>
+                                        <span class="text-dark">
+                                            <?php 
+                                            if ($reviewStatus === 'pending') echo 'На рассмотрении';
+                                            elseif ($reviewStatus === 'approved') echo 'Опубликован';
+                                            elseif ($reviewStatus === 'rejected') echo 'Отклонен';
+                                            ?>
+                                        </span>
+                                    </div>
+                                    
                                     <div class="mt-3">
                                         <form action="admin-reviews.php" method="post" class="d-inline">
                                             <input type="hidden" name="id" value="<?= $item['id'] ?>">
                                             
-                                            <?php if($reviewStatus === 1): ?>
+                                            <?php if($reviewStatus === 'pending'): ?>
                                                 <button type="submit" name="action" value="publish" class="btn btn-success btn-sm">Опубликовать</button>
                                                 <button type="submit" name="action" value="reject" class="btn btn-danger btn-sm">Отклонить</button>
-                                            <?php elseif($reviewStatus === 2): ?>
+                                            <?php elseif($reviewStatus === 'approved'): ?>
                                                 <button type="submit" name="action" value="reject" class="btn btn-danger btn-sm">Отклонить</button>
                                             <?php endif; ?>
                                         </form>
