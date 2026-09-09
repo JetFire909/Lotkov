@@ -1,0 +1,47 @@
+body {
+    background-image: url(1.jpg);
+    background-repeat: no-repeat;
+    background-position: 200px 200px;
+}
+h1.main_header{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-style: italic;
+    font-weight: 700;
+    font-size: 36px;
+    color: greenyellow;
+    background-color: aquamarine;
+    /* width: ;
+    height ;
+    padding: ;
+    border ; */
+}
+h2 {
+    color: rgb(255, 47, 234);
+    text-decoration: underline;
+}
+p {
+    text-indent: 30px;
+}
+ul {
+    list-style-type: circle;
+}
+a:link {
+    color: blue;
+}
+a:hover{
+    color: red;
+    text-decoration: none;
+}
+a:visited {
+    color: gray;
+}
+a:active {
+    color:aqua;
+}
+
+.par1 {
+    font-size: 24px;
+}
+#unic {
+    color:blueviolet;
+}

@@ -1,0 +1,84 @@
+p.blok1  {
+    border: 1px solid black;
+    margin: 10px;
+    padding: 10px;
+    background-color: aqua;
+    width: 100px;
+}
+
+p.blok2 {
+    border: 2px dashed  blue;
+    margin: 15px 5px;
+    padding: 15px 20px;
+    background-color: darkcyan;
+    width: 200px;
+    white-space: nowrap;
+}
+
+p.blok3 {
+    border: 3px dotted greenyellow;
+    margin: 20px 50px;
+    padding: 20px;
+    background-color: green;
+    width: 157px;
+    height: 67px;
+}
+
+p.blok4 {
+    border: 4px double red;
+    margin: 5px 25px;
+    padding: 5px 15px;
+    background-color: brown;
+    width: 95px;
+    height: 67px;
+}
+
+p.blok5 {
+    border: 5px solid orange;
+    margin: 30px;
+    padding: 25px;
+    background-color: chocolate;
+    overflow: scroll;
+    width: 54px;
+    height: 877px;
+}
+
+p.blok6 {
+    width: 500px;
+    /* height: 200px; */
+    border: 5px solid gray;
+    background-color: rgb(245, 222, 179);
+    display: flex;
+    margin: 0 auto;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    line-height: 200px;
+    position: relative;
+    /* bottom: 50%;
+    right: 50%; */
+}
+
+.img {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
+
+.img-fix {
+    position: fixed;
+    bottom: 30px;
+    right: 30px
+}
+
+p.blok1 {
+    width: 400px;
+    height: 250px;
+    background-color: blueviolet;
+     text-align: center;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    
+}

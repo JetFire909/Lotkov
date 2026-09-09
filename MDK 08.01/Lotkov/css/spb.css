@@ -1,0 +1,42 @@
+ body {
+    font-family: Arial, Helvetica, sans-serif;
+    color:burlywood;
+    background-color: black;
+}
+h1{
+    color: aquamarine;
+    text-align: center;
+    text-decoration: underline;
+}
+h2{
+    color: antiquewhite;
+    font-style: initial;
+}
+h3{
+    font-size: 1.4em;
+    color: bisque;
+    text-transform: uppercase;
+}
+p{
+    text-align: justify;
+    line-height: 1.8;
+    text-indent: 30px;
+}
+ul{
+    list-style-type: square;
+    background-color:rgb(101, 192, 148);
+    padding: 15px 30px;
+
+}
+ol{
+    list-style-type: upper-roman;
+    background-color: azure;
+    padding: 15px 30px;
+}
+li{
+    color:rgb(147, 50, 203);
+}
+ul ul {
+    list-style-type: circle;
+    background-color: #d8a8a8;
+}

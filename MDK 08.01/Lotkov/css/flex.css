@@ -1,0 +1,12 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.el {
+    border: 2px solid rgb(red, green, blue);
+    background-color: beige;
+    width: 100px;
+    height: 70px;
+    margin: 15px;
+}
